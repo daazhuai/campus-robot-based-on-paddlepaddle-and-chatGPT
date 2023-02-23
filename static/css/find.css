@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    height: 100%;
+}
+
+.login {
+    width: 358px;
+    height: 588px;
+    border-radius: 15px;
+    padding: 0 50px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f7fbfb;
+}
+
+.header {
+    font-size: 38px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 200px;
+    color: #e70808;
+}
+
+.container {
+    height: 30px;
+    width: 250px;
+    position: relative;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding-left: 5px;
+    background-color: #f8fcfc;
+    color: #e70808;
+    caret-color: #e70808;
+}
+
+input::placeholder {
+    color: #e70808;
+}
+
+span {
+    position: absolute;
+    content: "";
+    display: block;
+    background-color: #e70808;
+    transition: transform .1s ease-in-out;
+}
+
+.top,
+.bottom {
+    left: 0px;
+    right: 0px;
+    height: 2px;
+}
+
+.left,
+.right {
+    top: 0px;
+    bottom: 0px;
+    width: 2px;
+    transform: scaleY(0);
+}
+
+.top {
+    top: 0px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition-delay: .2s;
+}
+
+.left {
+    left: 0px;
+    transform-origin: bottom center;
+    transition-delay: .3s;
+}
+
+.bottom {
+    bottom: 0px;
+}
+
+.right {
+    right: 0px;
+    transform-origin: top center;
+    transition-delay: .1s;
+}
+
+input:focus ~ .right {
+    transform: scaleY(1);
+    transform-origin: bottom center;
+}
+
+input:focus ~ .left {
+    transform: scaleY(1);
+    transform-origin: top center;
+}
+
+input:focus ~ .top {
+    transform: scaleY(1);
+    transform-origin: right center;
+}
+
+.container1 {
+    height: 30px;
+    width: 250px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button {
+    position: relative;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #f8fcfc;
+    border: none;
+    color: #f8fcfc;
+    text-align: center;
+    font-size: 24px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    vertical-align:middle;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.a{
+    position: absolute;
+    left: 45%;
+    bottom: 20%;
+}

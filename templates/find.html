@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/find.css">
+    <script src="../static/js/axios.min.js"></script>
+    <script src="../static/js/sweetalert.min.js"></script>
+    <script>
+        function find(){
+      //alert('登录成功')
+      const username = document.querySelector('input[name=username]').value
+      const college = document.querySelector('input[name=college]').value
+      const id_number = document.querySelector('input[name=id_number]').value
+      const new_password = document.querySelector('input[name=new_password]').value
+      console.log(username)
+      //console.log(password)
+      //发送ajax请求
+
+      axios.post('http://127.0.0.1:5000/find',{
+        username,
+        college,
+        id_number,
+        new_password
+      }).then(res => {
+          let { data }= res;
+          //根据code判断返回结果，0代表成功
+          if(data.code === '1') {
+              swal(data.msg,"请返回登录","success");
+          } else {
+              swal(data.msg,"请再次尝试","warning");
+          }
+      }).catch(e => {
+
+      })
+    }
+    </script>
+</head>
+<body>
+<div class="login">
+    <div class="header">修改密码</div>
+    <div class="container">
+        <input type="text" placeholder="用户名" name="username">
+        <span class="left"></span>
+        <span class="right"></span>
+        <span class="top"></span>
+        <span class="bottom"></span>
+    </div>
+    <div class="container">
+        <input type="text" placeholder="学院" name="college">
+        <span class="left"></span>
+        <span class="right"></span>
+        <span class="top"></span>
+        <span class="bottom"></span>
+    </div>
+    <div class="container">
+        <input type="text" placeholder="学号" name="id_number">
+        <span class="left"></span>
+        <span class="right"></span>
+        <span class="top"></span>
+        <span class="bottom"></span>
+    </div>
+    <div class="container">
+        <input type="password" placeholder="新密码" name="new_password">
+        <span class="left"></span>
+        <span class="right"></span>
+        <span class="top"></span>
+        <span class="bottom"></span>
+    </div>
+    <button class="button" type="button" onclick="find()"><span>重设密码</span></button>
+    <a href="http://localhost:5000/" class="a" target="_blank">返回登录</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+  <style>
+        /**重置标签默认样式*/
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: '微软雅黑'
+        }
+        .header {
+            background: #000;
+            height: 120px;
+            width: 100%;
+            color: #fff;
+            line-height: 68px;
+            font-size: 40px;
+            padding: 0 20px;
+        }
+        .footer {
+            width: 100%;
+            height: 100px;
+            background: #666;
+            position: absolute;
+            bottom: 0;
+            padding: 20px;
+        }
+        .footer input {
+            width: 83%;
+            height: 90px;
+            outline: none;
+            font-size: 40px;
+            text-indent: 10px;
+            position: absolute;
+            border-radius: 12px;
+            right: 160px;
+        }
+        .footer span {
+            display: inline-block;
+            width: 124px;
+            height: 96px;
+            background: #ccc;
+            font-weight: 1800;
+            line-height: 90px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            right: 20px;
+            border-radius: 12px;
+        }
+        .footer span:hover {
+            color: #fff;
+            background: #999;
+        }
+        #user_face_icon {
+            display: inline-block;
+            background: red;
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            position: absolute;
+            bottom: 12px;
+            left: 28px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        img {
+            width: 120px;
+            height: 120px;
+        }
+        .content {
+            font-size: 40px;
+            width: 100%;
+            height: 1324px;
+            overflow: auto;
+            padding: 10px;
+        }
+        .content li {
+            margin-top: 20px;
+            padding-left: 20px;
+            width: 100%;
+            display: block;
+            clear: both;
+            overflow: hidden;
+        }
+        .content li img {
+            float: left;
+        }
+        .content li span{
+            background: #7cfc00;
+            padding: 20px;
+            border-radius: 20px;
+            float: left;
+            margin: 12px 20px 0 20px;
+            max-width: 620px;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 6px #ccc;
+        }
+        .content li img.imgleft {
+            float: left;
+        }
+        .content li img.imgright {
+            float: right;
+        }
+        .content li span.spanleft {
+            float: left;
+            background: #fff;
+        }
+        .content li span.spanright {
+            float: right;
+            background: #7cfc00;
+        }
+  </style>
+  <script src="../static/js/axios.min.js"></script>
+  <script>
+  window.onload = function(){
+      var btn = document.getElementById('btn');
+      var text = document.getElementById('text');
+      var content = document.getElementsByTagName('ul')[0];
+      var img = content.getElementsByTagName('img');
+      var span = content.getElementsByTagName('span');
+
+      btn.onclick = function(){
+                if(text.value ==''){
+                    alert('不能发送空消息');
+                }else {
+                    content.innerHTML += '<li><img src="../static/img/user.jpg"><span>'+text.value+'</span></li>';
+                    //iNow++;
+                    //if(num==0){
+                    console.log(img);
+                    img[img.length-1].className += 'imgright';
+                    span[img.length-1].className += 'spanright';
+                    const contest = document.querySelector('input[name=contest]').value
+                    axios.post('http://127.0.0.1:5000/user/talk/answer',{contest})
+                        .then(res=>{
+                            console.log('getData:',res.data)
+                            content.innerHTML += '<li><img src="../static/img/chatrobot.jpg" alt=""><span>'+res.data+'</span></li>'
+                            content.scrollTop = content.scrollHeight
+                        }).catch(error=>{
+                            console.log('get error:',error)
+                    })
+                    text.value = '';
+                    content.scrollTop=content.scrollHeight;
+                }
+            }
+        }
+  </script>
+</head>
+
+<body>
+<div id="container">
+  <div class="header">
+    <span style="float: left;">Campus Chat Robot</span>
+  </div>
+  <ul class="content">
+  </ul>
+  <div class="footer">
+    <input id="text" name="contest" type="text" placeholder="Writing Something...">
+    <span id="btn" style="font-size: large">send</span>
+  </div>
+</div>
+</body>
+</html>
